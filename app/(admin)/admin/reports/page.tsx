@@ -5,27 +5,27 @@
 // import { formatDate, conversionRate, formatPercent } from '@/lib/utils'
 
 // function PatientBadge({ type }: { type: string }) {
-  const opt = PATIENT_TYPE_OPTIONS.find(o => o.value === type)
-  if (!opt) return null
-  return (
-    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${opt.color}`}>
-      {opt.icon} {opt.label}
-    </span>
-  )
-}
+//   const opt = PATIENT_TYPE_OPTIONS.find(o => o.value === type)
+//   if (!opt) return null
+//   return (
+//     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${opt.color}`}>
+//       {opt.icon} {opt.label}
+//     </span>
+//   )
+// }
 
-function AdmissionBadge({ type }: { type?: string | null }) {
-  if (!type) return <span className="text-gray-300 text-xs">--</span>
-  const opt = ADMISSION_TYPE_OPTIONS.find(o => o.value === type)
-  if (!opt) return null
-  return (
-    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${opt.color}`}>
-      {opt.icon} {opt.label}
-    </span>
-  )
-}
+// function AdmissionBadge({ type }: { type?: string | null }) {
+//   if (!type) return <span className="text-gray-300 text-xs">--</span>
+//   const opt = ADMISSION_TYPE_OPTIONS.find(o => o.value === type)
+//   if (!opt) return null
+//   return (
+//     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium ${opt.color}`}>
+//       {opt.icon} {opt.label}
+//     </span>
+//   )
+// }
 
-export default function AdminReportsPage() {
+// export default function AdminReportsPage() {
 //   const [telecallers, setTelecallers] = useState<any[]>([])
 //   const [selectedTc,  setSelectedTc]  = useState('')
 //   const [dateFrom,    setDateFrom]    = useState(format(subDays(new Date(), 7), 'yyyy-MM-dd'))
