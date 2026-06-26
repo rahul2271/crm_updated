@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent iOS font size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-gray-900;
+    /* Base font: 15px on mobile, 14px (tailwind default) on desktop */
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* All form inputs readable on mobile — 16px prevents iOS auto-zoom */
+  input, select, textarea {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* On desktop, shrink back to 14px */
+  @media (min-width: 768px) {
+    body { font-size: 14px; }
+    input, select, textarea { font-size: 14px; }
+  }
+
+  /* Labels slightly bigger than tailwind text-xs default on mobile */
+  label { font-size: 13px; }
+
+  @media (min-width: 768px) {
+    label { font-size: 12px; }
+  }
+
+  /* Prevent horizontal overflow on any screen */
+  html, body { overflow-x: hidden; }
+
+  /* Smooth tap highlight */
+  * { -webkit-tap-highlight-color: transparent; }
+
+  /* Make sure selects are not cut off on iOS Safari */
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px !important;
+  }
+}
+
+@layer utilities {
+  /* Safe area padding for iPhone notch / home bar */
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .safe-top    { padding-top:    env(safe-area-inset-top, 0px);    }
+}
