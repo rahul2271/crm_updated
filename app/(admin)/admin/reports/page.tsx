@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 // 'use client'
 // import { useEffect, useState } from 'react'
 // import { format, subDays } from 'date-fns'
@@ -200,7 +199,6 @@
 //     </div>
 //   )
 // }
->>>>>>> origin/main
 
 
 
