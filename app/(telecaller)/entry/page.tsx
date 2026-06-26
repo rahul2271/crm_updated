@@ -1069,7 +1069,11 @@ import { Button } from '@/components/ui'
 import { CONSULT_OPTIONS, PATIENT_TYPE_OPTIONS, ADMISSION_TYPE_OPTIONS, GID_INSURANCE_COMPANIES } from '@/types'
 import { CitySearch } from '@/components/ui/CitySearch'
 import { AGE_GROUPS, INDIAN_STATES, todayString, formatDate, formatCurrency } from '@/lib/utils'
+<<<<<<< HEAD
 import { Trash2, PlusCircle, CheckCircle, Copy, Clock, AlertTriangle, CalendarX } from 'lucide-react'
+=======
+import { Trash2, PlusCircle, CheckCircle, Copy } from 'lucide-react'
+>>>>>>> origin/main
 
 const rowSchema = z.object({
   disease:          z.string().min(1, 'Select disease'),
@@ -1108,6 +1112,7 @@ function yesterdayString() {
   const d = new Date(); d.setDate(d.getDate() - 1); return d.toISOString().split('T')[0]
 }
 
+<<<<<<< HEAD
 // Returns IST time components
 function getIST() {
   const now   = new Date()
@@ -1185,6 +1190,8 @@ function CountdownBanner({ selectedDate }: { selectedDate: string }) {
   )
 }
 
+=======
+>>>>>>> origin/main
 export default function EntryPage() {
   const [diseases,     setDiseases]     = useState<{ name: string; category: string }[]>([])
   const [saving,       setSaving]       = useState(false)
@@ -1249,10 +1256,15 @@ export default function EntryPage() {
 
   function duplicateRow(i: number) { append({ ...entries[i] }) }
 
+<<<<<<< HEAD
   const [auditResult, setAuditResult] = useState<{ isLate: boolean; isBackdate: boolean } | null>(null)
 
   async function onSubmit(data: FormValues) {
     setSaving(true); setSaved(false); setAuditResult(null)
+=======
+  async function onSubmit(data: FormValues) {
+    setSaving(true); setSaved(false)
+>>>>>>> origin/main
     try {
       const res = await fetch('/api/entries', {
         method: 'POST',
@@ -1260,11 +1272,17 @@ export default function EntryPage() {
         body: JSON.stringify({ ...data, date: selectedDate }),
       })
       if (!res.ok) throw new Error((await res.json()).error ?? 'Save failed')
+<<<<<<< HEAD
       const json = await res.json()
       setHasExisting(true)
       setSaved(true)
       if (json.audit) setAuditResult(json.audit)
       setTimeout(() => setSaved(false), 5000)
+=======
+      setHasExisting(true)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 4000)
+>>>>>>> origin/main
     } catch (e) {
       alert(e instanceof Error ? e.message : 'Save failed')
     } finally { setSaving(false) }
@@ -1272,6 +1290,7 @@ export default function EntryPage() {
 
   return (
     <div>
+<<<<<<< HEAD
       <div className="mb-4">
         <h1 className="text-xl font-bold text-gray-900">Daily data entry</h1>
         <p className="text-sm text-gray-500 mt-0.5">Switching dates loads that day's sheet — blank if none exists.</p>
@@ -1292,6 +1311,16 @@ export default function EntryPage() {
               <p className="text-xs text-orange-600 font-medium mt-0.5">📅 Marked as backdated — submitted on a different day</p>
             )}
           </div>
+=======
+      <div className="mb-5">
+        <h1 className="text-2xl font-bold text-gray-900">Daily data entry</h1>
+        <p className="text-sm text-gray-500 mt-1">Switching dates loads that day's sheet — blank if none exists.</p>
+      </div>
+
+      {saved && (
+        <div className="mb-4 bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-lg flex items-center gap-2">
+          <CheckCircle size={16} /> Saved for {formatDate(selectedDate + 'T00:00:00')}!
+>>>>>>> origin/main
         </div>
       )}
 
@@ -1326,6 +1355,7 @@ export default function EntryPage() {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
 
+<<<<<<< HEAD
           {/* Total leads + running totals */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 mb-4">
             <div className="bg-white rounded-xl border border-gray-200 p-3 flex flex-col gap-1">
@@ -1344,6 +1374,28 @@ export default function EntryPage() {
               <div key={s.label} className="bg-white rounded-xl border border-gray-100 p-3">
                 <p className="text-xs font-medium text-gray-500 uppercase tracking-wide leading-tight">{s.label}</p>
                 <p className={`text-lg font-bold mt-1 ${s.color} truncate`}>{s.value}</p>
+=======
+          {/* Total leads + running totals in one row */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
+            {/* Total leads given — editable */}
+            <div className="bg-white rounded-xl border border-gray-200 p-3 flex flex-col gap-1">
+              <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Leads given to you</label>
+              <input type="number" min={0} placeholder="0"
+                {...register('totalLeadsGiven', { valueAsNumber: true })}
+                className="text-xl font-bold text-gray-900 w-full border-0 outline-none focus:outline-none bg-transparent p-0" />
+              {errors.totalLeadsGiven && <p className="text-xs text-red-500">{errors.totalLeadsGiven.message}</p>}
+            </div>
+            {/* Auto totals */}
+            {[
+              { label: 'Rows filled',    value: String(fields.length),          color: 'text-purple-700' },
+              { label: 'Leads worked',   value: String(totalLeads),             color: 'text-blue-700'   },
+              { label: 'Converted',      value: String(totalConverted),         color: 'text-green-700'  },
+              { label: 'Revenue',        value: formatCurrency(totalRevenue),   color: 'text-brand-700'  },
+            ].map(s => (
+              <div key={s.label} className="bg-white rounded-xl border border-gray-100 p-3">
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">{s.label}</p>
+                <p className={`text-xl font-bold mt-1 ${s.color}`}>{s.value}</p>
+>>>>>>> origin/main
               </div>
             ))}
           </div>
@@ -1376,6 +1428,7 @@ export default function EntryPage() {
                   </div>
                 </div>
 
+<<<<<<< HEAD
                 <div className="p-3 sm:p-4 space-y-4">
 
                   {/* ── Section 1: Disease (full width) ── */}
@@ -1397,10 +1450,35 @@ export default function EntryPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Type</label>
+=======
+                <div className="p-4 space-y-3">
+                  {/* Line 1: Disease + Type + Patient + Admission + Insurance + Numbers */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap lg:items-end gap-3">
+
+                    {/* Disease */}
+                    <div className="flex flex-col gap-1 sm:col-span-2 lg:flex-1" style={{ minWidth: 0 }}>
+                      <label className="text-xs font-medium text-gray-600">Disease *</label>
+                      <select {...register(`entries.${i}.disease`)}
+                        className={`rounded-lg border px-2.5 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 w-full ${errors.entries?.[i]?.disease ? 'border-red-400' : 'border-gray-200'}`}>
+                        <option value="">Select disease…</option>
+                        {Object.entries(diseasesByCategory).map(([cat, names]) => (
+                          <optgroup key={cat} label={cat}>
+                            {names.map(n => <option key={n} value={n}>{n}</option>)}
+                          </optgroup>
+                        ))}
+                      </select>
+                      {errors.entries?.[i]?.disease && <p className="text-xs text-red-500">{errors.entries[i]?.disease?.message}</p>}
+                    </div>
+
+                    {/* Consultation type */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-600">Type</label>
+>>>>>>> origin/main
                       <Controller control={control} name={`entries.${i}.consultationType`}
                         render={({ field }) => {
                           const opt = CONSULT_OPTIONS.find(o => o.value === field.value)
                           return (
+<<<<<<< HEAD
                             <select value={field.value} onChange={e => field.onChange(e.target.value)}
                               className={`rounded-lg border px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
                                 opt?.value === 'online'   ? 'border-blue-300 text-blue-700'     :
@@ -1409,36 +1487,80 @@ export default function EntryPage() {
                                 'border-purple-300 text-purple-700'
                               }`}>
                               {CONSULT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.icon} {o.label}</option>)}
+=======
+                            <select
+                              value={field.value}
+                              onChange={e => field.onChange(e.target.value)}
+                              className={`rounded-lg border px-2.5 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
+                                opt?.value === 'online'   ? 'border-blue-300 text-blue-700'   :
+                                opt?.value === 'hospital' ? 'border-orange-300 text-orange-700' :
+                                opt?.value === 'whatsapp' ? 'border-green-300 text-green-700'  :
+                                'border-purple-300 text-purple-700'
+                              }`}
+                            >
+                              {CONSULT_OPTIONS.map(o => (
+                                <option key={o.value} value={o.value}>
+                                  {o.icon} {o.label}
+                                </option>
+                              ))}
+>>>>>>> origin/main
                             </select>
                           )
                         }} />
                     </div>
 
+<<<<<<< HEAD
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Patient *</label>
+=======
+                    {/* Patient type */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-600">Patient *</label>
+>>>>>>> origin/main
                       <Controller control={control} name={`entries.${i}.patientType`}
                         render={({ field }) => {
                           const opt = PATIENT_TYPE_OPTIONS.find(o => o.value === field.value)
                           return (
+<<<<<<< HEAD
                             <select value={field.value} onChange={e => field.onChange(e.target.value)}
                               className={`rounded-lg border px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
                                 opt?.value === 'new' ? 'border-teal-300 text-teal-700' : 'border-indigo-300 text-indigo-700'
                               }`}>
                               {PATIENT_TYPE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.icon} {o.label}</option>)}
+=======
+                            <select
+                              value={field.value}
+                              onChange={e => field.onChange(e.target.value)}
+                              className={`rounded-lg border px-2.5 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
+                                opt?.value === 'new' ? 'border-teal-300 text-teal-700' : 'border-indigo-300 text-indigo-700'
+                              }`}
+                            >
+                              {PATIENT_TYPE_OPTIONS.map(o => (
+                                <option key={o.value} value={o.value}>{o.icon} {o.label}</option>
+                              ))}
+>>>>>>> origin/main
                             </select>
                           )
                         }} />
                     </div>
+<<<<<<< HEAD
                   </div>
 
                   {/* ── Section 3: Admission + Insurance (2-col) ── */}
                   <div className="grid grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Admission</label>
+=======
+
+                    {/* Admission type */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-600">Admission <span className="text-gray-400">(optional)</span></label>
+>>>>>>> origin/main
                       <Controller control={control} name={`entries.${i}.admissionType`}
                         render={({ field }) => {
                           const opt = ADMISSION_TYPE_OPTIONS.find(o => o.value === field.value)
                           return (
+<<<<<<< HEAD
                             <select value={field.value ?? ''} onChange={e => field.onChange(e.target.value || null)}
                               className={`rounded-lg border px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
                                 opt?.value === 'IPD'      ? 'border-red-300 text-red-700'       :
@@ -1448,11 +1570,28 @@ export default function EntryPage() {
                               }`}>
                               <option value="">None</option>
                               {ADMISSION_TYPE_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.icon} {o.label}</option>)}
+=======
+                            <select
+                              value={field.value ?? ''}
+                              onChange={e => field.onChange(e.target.value || null)}
+                              className={`rounded-lg border px-2.5 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
+                                opt?.value === 'IPD'      ? 'border-red-300 text-red-700'       :
+                                opt?.value === 'OPD'      ? 'border-yellow-300 text-yellow-700' :
+                                opt?.value === 'Cashless' ? 'border-cyan-300 text-cyan-700'     :
+                                'border-gray-200 text-gray-500'
+                              }`}
+                            >
+                              <option value="">-- None --</option>
+                              {ADMISSION_TYPE_OPTIONS.map(o => (
+                                <option key={o.value} value={o.value}>{o.icon} {o.label}</option>
+                              ))}
+>>>>>>> origin/main
                             </select>
                           )
                         }} />
                     </div>
 
+<<<<<<< HEAD
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Insurance (GID)</label>
                       <Controller control={control} name={`entries.${i}.insuranceCompany`}
@@ -1464,10 +1603,30 @@ export default function EntryPage() {
                             <option value="">Self-pay</option>
                             <optgroup label="GID Insurance">
                               {GID_INSURANCE_COMPANIES.map(name => <option key={name} value={name}>{name}</option>)}
+=======
+                    {/* Insurance company (GID) */}
+                    <div className="flex flex-col gap-1 sm:col-span-2 lg:col-span-1">
+                      <label className="text-xs font-medium text-gray-600">Insurance Co. <span className="text-gray-400">(GID · optional)</span></label>
+                      <Controller control={control} name={`entries.${i}.insuranceCompany`}
+                        render={({ field }) => (
+                          <select
+                            value={field.value ?? ''}
+                            onChange={e => field.onChange(e.target.value || null)}
+                            className={`rounded-lg border px-2.5 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium w-full ${
+                              field.value ? 'border-violet-300 text-violet-700' : 'border-gray-200 text-gray-500'
+                            }`}
+                          >
+                            <option value="">🏢 No insurance / Self-pay</option>
+                            <optgroup label="GID Insurance Companies">
+                              {GID_INSURANCE_COMPANIES.map(name => (
+                                <option key={name} value={name}>{name}</option>
+                              ))}
+>>>>>>> origin/main
                             </optgroup>
                           </select>
                         )} />
                     </div>
+<<<<<<< HEAD
                   </div>
 
                   {/* ── Section 4: Leads + Converted + Revenue (3-col) ── */}
@@ -1484,11 +1643,29 @@ export default function EntryPage() {
                       <input type="number" min={0} placeholder="0" inputMode="numeric"
                         {...register(`entries.${i}.convertedCount`, { valueAsNumber: true })}
                         className={`rounded-lg border px-3 py-2.5 text-center focus:outline-none focus:ring-2 focus:ring-brand-500 w-full ${errors.entries?.[i]?.convertedCount ? 'border-red-400' : 'border-gray-200'}`} />
+=======
+
+                    {/* Leads */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-600">Leads</label>
+                      <input type="number" min={0} placeholder="0"
+                        {...register(`entries.${i}.leadsCount`, { valueAsNumber: true })}
+                        className={`w-full rounded-lg border px-2.5 py-2 text-sm text-center focus:outline-none focus:ring-2 focus:ring-brand-500 ${errors.entries?.[i]?.leadsCount ? 'border-red-400' : 'border-gray-200'}`} />
+                    </div>
+
+                    {/* Converted */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-600">Converted</label>
+                      <input type="number" min={0} placeholder="0"
+                        {...register(`entries.${i}.convertedCount`, { valueAsNumber: true })}
+                        className={`w-full rounded-lg border px-2.5 py-2 text-sm text-center focus:outline-none focus:ring-2 focus:ring-brand-500 ${errors.entries?.[i]?.convertedCount ? 'border-red-400' : 'border-gray-200'}`} />
+>>>>>>> origin/main
                       {errors.entries?.[i]?.convertedCount && (
                         <p className="text-xs text-red-500">{errors.entries[i]?.convertedCount?.message}</p>
                       )}
                     </div>
 
+<<<<<<< HEAD
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Revenue ₹</label>
                       <input type="number" min={0} placeholder="0" inputMode="numeric"
@@ -1503,30 +1680,76 @@ export default function EntryPage() {
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Age group</label>
                       <select {...register(`entries.${i}.ageGroup`)}
                         className="rounded-lg border border-gray-200 px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 w-full">
+=======
+                    {/* Revenue */}
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-600">Revenue (₹)</label>
+                      <div className="relative">
+                        <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-medium">₹</span>
+                        <input type="number" min={0} placeholder="0"
+                          {...register(`entries.${i}.revenueGenerated`, { valueAsNumber: true })}
+                          className="w-full rounded-lg border border-gray-200 pl-6 pr-2.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Line 2: Age group + City + State */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 border-t border-gray-50">
+
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-500">Age group</label>
+                      <select {...register(`entries.${i}.ageGroup`)}
+                        className="rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 w-full">
+>>>>>>> origin/main
                         {AGE_GROUPS.map(g => <option key={g} value={g}>{g} yrs</option>)}
                       </select>
                     </div>
 
+<<<<<<< HEAD
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">City *</label>
                       <Controller control={control} name={`entries.${i}.city`}
                         render={({ field }) => (
                           <CitySearch value={field.value} onChange={field.onChange} error={errors.entries?.[i]?.city?.message} />
+=======
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-500">City *</label>
+                      <Controller control={control} name={`entries.${i}.city`}
+                        render={({ field }) => (
+                          <CitySearch
+                            value={field.value}
+                            onChange={field.onChange}
+                            error={errors.entries?.[i]?.city?.message}
+                          />
+>>>>>>> origin/main
                         )} />
                       {errors.entries?.[i]?.city && <p className="text-xs text-red-500">{errors.entries[i]?.city?.message}</p>}
                     </div>
 
+<<<<<<< HEAD
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">State *</label>
                       <select {...register(`entries.${i}.state`)}
                         className={`rounded-lg border px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 w-full ${errors.entries?.[i]?.state ? 'border-red-400' : 'border-gray-200'}`}>
+=======
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-medium text-gray-500">State *</label>
+                      <select {...register(`entries.${i}.state`)}
+                        className={`rounded-lg border px-2.5 py-1.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 w-full ${errors.entries?.[i]?.state ? 'border-red-400' : 'border-gray-200'}`}>
+>>>>>>> origin/main
                         <option value="">Select state…</option>
                         {INDIAN_STATES.map(s => <option key={s} value={s}>{s}</option>)}
                       </select>
                       {errors.entries?.[i]?.state && <p className="text-xs text-red-500">{errors.entries[i]?.state?.message}</p>}
                     </div>
+<<<<<<< HEAD
                   </div>
 
+=======
+
+                  </div>
+>>>>>>> origin/main
                 </div>
               </div>
             ))}

@@ -81,6 +81,7 @@
 // }
 
 
+<<<<<<< HEAD
 // import { NextRequest, NextResponse } from 'next/server'
 // import { getServerSession } from 'next-auth'
 // import { authOptions } from '@/lib/auth'
@@ -199,6 +200,8 @@
 
 
 
+=======
+>>>>>>> origin/main
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -240,6 +243,7 @@ export async function POST(req: NextRequest) {
 
   await connectDB()
 
+<<<<<<< HEAD
   // ── Audit: compute late / backdate status ─────────────────────────────────
   // All timestamps in IST (UTC+5:30)
   const nowUTC      = new Date()
@@ -284,6 +288,15 @@ export async function POST(req: NextRequest) {
   )
 
   return NextResponse.json({ success: true, data: entry, audit: { isLate, isBackdate, submittedOn } })
+=======
+  const entry = await DailyEntry.findOneAndUpdate(
+    { telecallerId: session.user.id, date: parsed.data.date },
+    { ...parsed.data, telecallerId: session.user.id },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  )
+
+  return NextResponse.json({ success: true, data: entry })
+>>>>>>> origin/main
 }
 
 export async function GET(req: NextRequest) {
