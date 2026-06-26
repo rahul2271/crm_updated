@@ -210,7 +210,6 @@ export interface IDiseaseEntry {
   revenueGenerated: number
 }
 
-<<<<<<< HEAD
 export interface ISubmissionLog {
   action:     'first_submit' | 'update'
   timestamp:  Date
@@ -219,8 +218,6 @@ export interface ISubmissionLog {
   submittedOn: string   // YYYY-MM-DD — actual calendar date when submitted
 }
 
-=======
->>>>>>> origin/main
 export interface IDailyEntry {
   _id: Types.ObjectId
   telecallerId: Types.ObjectId
@@ -228,10 +225,7 @@ export interface IDailyEntry {
   totalLeadsGiven: number
   entries: IDiseaseEntry[]
   notes?: string
-<<<<<<< HEAD
   submissionLog: ISubmissionLog[]
-=======
->>>>>>> origin/main
   createdAt: Date
   updatedAt: Date
 }

@@ -119,7 +119,6 @@ const DiseaseEntrySchema = new Schema(
   { _id: false }
 )
 
-<<<<<<< HEAD
 const SubmissionLogSchema = new Schema(
   {
     action:      { type: String, enum: ['first_submit', 'update'], required: true },
@@ -131,8 +130,6 @@ const SubmissionLogSchema = new Schema(
   { _id: false }
 )
 
-=======
->>>>>>> origin/main
 const DailyEntrySchema = new Schema<IDailyEntry>(
   {
     telecallerId:    { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
@@ -140,10 +137,7 @@ const DailyEntrySchema = new Schema<IDailyEntry>(
     totalLeadsGiven: { type: Number, required: true, min: 0 },
     entries:         { type: [DiseaseEntrySchema], default: [] },
     notes:           { type: String, trim: true },
-<<<<<<< HEAD
     submissionLog:   { type: [SubmissionLogSchema], default: [] },
-=======
->>>>>>> origin/main
   },
   { timestamps: true }
 )

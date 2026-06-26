@@ -343,10 +343,6 @@ export default function AnalyticsPage() {
             </div>
           )}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
           {/* Trend */}
           <Card title="Revenue & leads trend">
             <div className="p-4">
@@ -1070,16 +1066,3 @@ export default function AnalyticsPage() {
     </div>
   )
 }
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
->>>>>>> origin/main

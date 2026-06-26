@@ -4,7 +4,6 @@
 
 @layer base {
   * { box-sizing: border-box; }
-<<<<<<< HEAD
 
   html {
     -webkit-font-smoothing: antialiased;
@@ -61,8 +60,4 @@
   /* Safe area padding for iPhone notch / home bar */
   .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
   .safe-top    { padding-top:    env(safe-area-inset-top, 0px);    }
-=======
-  html { -webkit-font-smoothing: antialiased; }
-  body { @apply bg-slate-50 text-gray-900; }
->>>>>>> origin/main
 }

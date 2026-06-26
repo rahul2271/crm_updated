@@ -6,21 +6,14 @@ import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
 import {
   LayoutDashboard, Users, TrendingUp, FileText,
-<<<<<<< HEAD
   LogOut, ChevronRight, ClipboardList, History, Stethoscope, Menu, X, Shield,
-=======
-  LogOut, ChevronRight, ClipboardList, History, Stethoscope, Menu, X,
->>>>>>> origin/main
 } from 'lucide-react'
 
 const adminNav = [
   { label: 'Dashboard',   href: '/admin/dashboard',   icon: <LayoutDashboard size={17} /> },
   { label: 'Analytics',   href: '/admin/analytics',   icon: <TrendingUp size={17} /> },
   { label: 'Reports',     href: '/admin/reports',     icon: <FileText size={17} /> },
-<<<<<<< HEAD
   { label: 'Audit',       href: '/admin/audit',       icon: <Shield size={17} /> },
-=======
->>>>>>> origin/main
   { label: 'Telecallers', href: '/admin/telecallers', icon: <Users size={17} /> },
   { label: 'Diseases',    href: '/admin/diseases',    icon: <Stethoscope size={17} /> },
 ]
